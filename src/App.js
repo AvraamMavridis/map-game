@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Map from './components/Map';
+import User from './components/User';
 import Rx from 'rx';
 
 const arrowKeys = {
@@ -60,6 +61,6 @@ export default class App extends Component
 
     render()
     {
-        return ( <Map position={ this.state } />);
+        return ( <User/>);
     }
 }
