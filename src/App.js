@@ -16,6 +16,15 @@ const arrowKeys = {
 export default class App extends Component
 {
 
+    constructor()
+    {
+      super();
+      this.state = {
+        lat: 0,
+        lng : 0
+      };
+    }
+
     getUserLocation()
     {
         return new Promise( ( resolve, reject ) => {
@@ -23,21 +32,34 @@ export default class App extends Component
         });
     }
 
+    setNewPosition( move )
+    {
+      const pos = move === 'up' || move === 'down' ? 'lat' : 'lng';
+      const movement = move === 'up' || move === 'right' ? 0.00001 : -0.00001;
+      this.setState({
+        [pos] : this.state[pos] + movement
+      });
+    }
+
     componentDidMount()
     {
-        var mouseMove = Rx.Observable.fromEvent( document, 'keyup' )
+        var mouseMove = Rx.Observable.fromEvent( document, 'keydown' )
                      .map( event => arrowKeys[event.which] )
                      .filter(Boolean)
+                     .subscribe( this.setNewPosition.bind(this))
 
         var userLocation = Rx.Observable.fromPromise( this.getUserLocation() )
-                            .map( geodata => geodata.coords )
-
-        Rx.Observable.combineLatest( mouseMove, userLocation )
-                        .subscribe( data => console.log( data ) );
+                            .map( ({coords}) => (
+                              {
+                                lat : coords.latitude,
+                                lng : coords.longitude
+                              }
+                            ) )
+                            .subscribe( this.setState.bind(this) )
     }
 
     render()
     {
-        return ( <div></div>);
+        return ( <Map position={ this.state } />);
     }
 }

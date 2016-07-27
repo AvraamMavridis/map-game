@@ -3,9 +3,10 @@ import { GoogleMapLoader, GoogleMap, Marker } from "react-google-maps";
 
 export default class Map extends Component
 {
-
     render()
     {
+        const { position } = this.props;
+
         return (
             <section style={{height: "500px"}}>
               <GoogleMapLoader
@@ -18,10 +19,12 @@ export default class Map extends Component
                 }
                 googleMapElement={
                   <GoogleMap
-                    defaultZoom={3}
-                    defaultCenter={{ lat: -25.363882, lng: 131.044922 }}
+                    defaultZoom={15}
+                    defaultCenter={position}
+                    center={position}
+                    onCenterChanged={this.handleCenterChanged}
                   >
-                    <Marker position={{ lat: -25.363882, lng: 21.044922 }} />
+                    <Marker position={position} />
                   </GoogleMap>
                 }
               />
