@@ -36,6 +36,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "fetch-polyfill": "^0.8.2",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-google-login": "^2.1.2",

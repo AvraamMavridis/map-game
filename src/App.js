@@ -22,7 +22,8 @@ export default class App extends Component
       super();
       this.state = {
         lat: 0,
-        lng : 0
+        lng : 0,
+        direction : 0
       };
     }
 
@@ -35,10 +36,11 @@ export default class App extends Component
 
     setNewPosition( move )
     {
-      const pos = move === 'up' || move === 'down' ? 'lat' : 'lng';
-      const movement = move === 'up' || move === 'right' ? 0.00001 : -0.00001;
+      const direction = move === 'up' || move === 'down' ? 'lat' : 'lng';
+      const movement = move === 'up' || move === 'right' ? 0.0001 : -0.0001;
       this.setState({
-        [pos] : this.state[pos] + movement
+        [direction] : this.state[direction] + movement,
+        direction
       });
     }
 
@@ -61,6 +63,6 @@ export default class App extends Component
 
     render()
     {
-        return ( <User/>);
+        return ( <Map position={this.state}/>);
     }
 }

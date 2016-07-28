@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { GoogleMapLoader, GoogleMap, Marker } from "react-google-maps";
+import playerIcon from '../../../public/assets/man.png';
 
 export default class Map extends Component
 {
@@ -24,7 +25,13 @@ export default class Map extends Component
                     center={position}
                     onCenterChanged={this.handleCenterChanged}
                   >
-                    <Marker position={position} />
+                    <Marker
+                      icon={{
+                        url    : playerIcon,
+                        size   : new google.maps.Size(32, 32),
+                        origin : new google.maps.Point(0, 32)
+                      } }
+                      position={position} />
                   </GoogleMap>
                 }
               />
