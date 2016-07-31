@@ -37,10 +37,10 @@ export default class App extends Component
     setNewPosition( move )
     {
       const direction = move === 'up' || move === 'down' ? 'lat' : 'lng';
-      const movement = move === 'up' || move === 'right' ? 0.0001 : -0.0001;
+      const movement = move === 'up' || move === 'right' ? 0.001 : -0.001;
       this.setState({
         [direction] : this.state[direction] + movement,
-        direction
+        move
       });
     }
 
@@ -63,6 +63,8 @@ export default class App extends Component
 
     render()
     {
-        return ( <Map position={this.state}/>);
+        const { lat, lng, move='right' } = this.state;
+
+        return ( <Map position={ { lat, lng } } move={ move }/>);
     }
 }
