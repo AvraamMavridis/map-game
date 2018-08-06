@@ -3,6 +3,8 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ## Sending Feedback
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/AvraamMavridis/map-game.svg)](https://greenkeeper.io/)
+
 We are always open to [your feedback](https://github.com/facebookincubator/create-react-app/issues).
 
 ## Folder Structure
